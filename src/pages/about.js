@@ -13,7 +13,7 @@ export default function About() {
           <a href="https://www.dronedeploy.com/">DroneDeploy</a>.
         </p>
         <p>
-          I like to make websites. After I got out of the Army in 2009, I knew I wanted to do *something* with
+          I like to make websites. After I got out of the Army in 2009, I knew I wanted to do <strong>something</strong> with
           technology, but I wasn't sure what. In early 2010, I finally found my calling as a web developer. I got my
           start in a ColdFusion shop and worked quickly to devour as much knowledge as I could.
         </p>

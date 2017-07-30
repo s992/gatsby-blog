@@ -4,8 +4,8 @@ import Helmet from 'react-helmet';
 import 'prism-themes/themes/prism-ghcolors.css';
 
 import { siteMetadata } from '../../gatsby-config';
-import Header from './header';
-import Footer from './Footer';
+import Header from '../components/header';
+import Footer from '../components/footer';
 
 import '../scss/site.scss';
 
