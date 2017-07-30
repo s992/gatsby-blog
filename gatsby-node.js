@@ -1,4 +1,7 @@
 const path = require('path');
+const fs = require('fs');
+
+const redirects = require('./redirects');
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
@@ -54,4 +57,10 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       });
     }
   });
+};
+
+exports.onPostBuild = (...args) => {
+  const netlifyRedirects = redirects.map(({ oldPath, newPath, httpCode }) => `${oldPath} ${newPath} ${httpCode}`);
+
+  fs.writeFileSync(`${__dirname}/public/_redirects`, netlifyRedirects.join('\n'));
 };
