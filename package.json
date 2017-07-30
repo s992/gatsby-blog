@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "swalsh.org",
+  "description": "swalsh.org",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Sean Walsh <sean@swalsh.org>",
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "font-awesome": "^4.7.0",
