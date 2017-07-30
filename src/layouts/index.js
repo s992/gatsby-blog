@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
+import 'prism-themes/themes/prism-ghcolors.css';
 
-import '../css/typography.css';
+import { siteMetadata } from '../../gatsby-config';
+import Header from './header';
+import Footer from './Footer';
+
+import '../scss/site.scss';
 
 export default class Template extends React.Component {
   static propTypes = {
@@ -13,46 +17,19 @@ export default class Template extends React.Component {
   render() {
     return (
       <div>
-        <Helmet
-          title="Gatsby Default Starter"
-          meta={[{ name: 'description', content: 'Sample' }, { name: 'keywords', content: 'sample, something' }]}
-        />
-        <div
-          style={{
-            background: `rebeccapurple`,
-            marginBottom: `1.45rem`,
-          }}
-        >
-          <div
-            style={{
-              margin: `0 auto`,
-              maxWidth: 960,
-              padding: `1.45rem 1.0875rem`,
-            }}
-          >
-            <h1 style={{ margin: 0 }}>
-              <Link
-                to="/"
-                style={{
-                  color: 'white',
-                  textDecoration: 'none',
-                }}
-              >
-                Gatsby
-              </Link>
-            </h1>
-          </div>
-        </div>
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
+        <Helmet>
+          <title>
+            {siteMetadata.title}
+          </title>
+          <meta name="author" content={siteMetadata.author} />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Slabo+27px|Roboto" />
+        </Helmet>
+        <Header title={siteMetadata.title} />
+        <main className="container-fluid">
           {this.props.children()}
-        </div>
+        </main>
+        <Footer socialLinks={siteMetadata.socialLinks} />
       </div>
     );
   }
