@@ -1,0 +1,2 @@
+/blog/:year/:month/:date/:slug /blog/:slug 301
+/test /test123 302
