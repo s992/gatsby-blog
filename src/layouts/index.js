@@ -17,14 +17,6 @@ export default class Template extends React.Component {
   render() {
     return (
       <div>
-        <Helmet>
-          <title>
-            {siteMetadata.title}
-          </title>
-          <meta name="author" content={siteMetadata.author} />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Slabo+27px|Roboto" />
-        </Helmet>
         <Header title={siteMetadata.title} />
         <main className="container-fluid">
           {this.props.children()}
