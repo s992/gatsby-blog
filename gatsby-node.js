@@ -1,4 +1,15 @@
 const path = require('path');
+const Remark = require('remark');
+const find = require('unist-util-find');
+const filter = require('unist-util-filter');
+const toHAST = require('mdast-util-to-hast');
+const hastToHTML = require('hast-util-to-html');
+
+const remark = new Remark().data('settings', {
+  commonmark: true,
+  footnotes: true,
+  pedantic: true,
+});
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
@@ -54,4 +65,38 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       });
     }
   });
+};
+
+// there absolutely has to be a cleaner way to do this, but..
+exports.onCreateNode = ({ node, boundActionCreators }) => {
+  if (node.internal.type !== 'MarkdownRemark') {
+    return;
+  }
+
+  const { createNode, createNodeField } = boundActionCreators;
+  const ast = remark.parse(node.internal.content);
+  const more = find(ast, node => node.type === 'html' && node.value === '<!-- more -->');
+
+  if (!more) {
+    return createNodeField({ node, name: 'more', value: '' });
+  }
+
+  let gotExcerpt = false;
+
+  const excerpt = filter(ast, node => {
+    if (gotExcerpt || node.type === 'yaml') {
+      return false;
+    }
+
+    if (node.type === 'html' && node.value === '<!-- more -->') {
+      gotExcerpt = true;
+      return false;
+    }
+
+    return true;
+  });
+
+  const html = hastToHTML(toHAST(excerpt, { allowDangerousHTML: true }), { allowDangerousHTML: true });
+
+  return createNodeField({ node, name: 'more', value: html });
 };

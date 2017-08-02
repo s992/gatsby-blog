@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link';
+import get from 'lodash.get';
 
 import BlogHeader from '../components/blog-header';
 
@@ -13,10 +14,11 @@ export default function Pagination({ data, pathContext }) {
         <div className="row" key={post.id}>
           <article className="col-md-8 col-lg-7 col-xl-5 center-block">
             <BlogHeader {...post.frontmatter} />
-            <div className="content" dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-            <footer>
-              <Link to={post.frontmatter.path}>Read on &rarr;</Link>
-            </footer>
+            <div className="content" dangerouslySetInnerHTML={{ __html: get(post, 'fields.more') || post.html }} />
+            {get(post, 'fields.more') &&
+              <footer>
+                <Link to={post.frontmatter.path}>Read on &rarr;</Link>
+              </footer>}
           </article>
         </div>,
       )}
@@ -26,13 +28,11 @@ export default function Pagination({ data, pathContext }) {
             {next &&
               <Link to={next} className="pull-left">
                 &laquo; Older
-              </Link>
-            }
+              </Link>}
             {prev &&
               <Link to={prev} className="pull-right">
                 Newer &raquo;
-              </Link>
-            }
+              </Link>}
           </nav>
         </div>
       </div>
@@ -45,8 +45,11 @@ export const pageQuery = graphql`
     allMarkdownRemark(limit: 5, skip: $offset, sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
-          excerpt(pruneLength: 500)
           id
+          html
+          fields {
+            more
+          }
           frontmatter {
             title
             date
