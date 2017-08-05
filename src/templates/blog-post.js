@@ -26,12 +26,14 @@ export default function Template({ data, location }) {
       <div className="row">
         <div className="col-md-8 col-lg-7 col-xl-5 center-block">
           <h1> Comments</h1>
-          <ReactDisqusComments
-            shortname={siteMetadata.disqus.shortName}
-            identifier={disqusId}
-            title={post.frontmatter.title}
-            url={post.frontmatter.path}
-          />
+          {post.frontmatter.comments
+            ? <ReactDisqusComments
+                shortname={siteMetadata.disqus.shortName}
+                identifier={disqusId}
+                title={post.frontmatter.title}
+                url={post.frontmatter.path}
+              />
+            : <p>Comments are disabled for this post.</p>}
         </div>
       </div>
     </main>
@@ -50,6 +52,7 @@ export const pageQuery = graphql`
         day: date(formatString: "DD")
         path
         title
+        comments
       }
     }
   }
