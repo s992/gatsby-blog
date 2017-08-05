@@ -9,13 +9,14 @@ export default function About() {
       <div className="col-md-8 col-lg-7 col-xl-5 center-block">
         <h1>About Sean</h1>
         <p>
-          My name is Sean Walsh. I'm a husband, father, and software engineer at{' '}
-          <a href="https://www.dronedeploy.com/">DroneDeploy</a>.
+          My name is Sean Walsh. I'm a husband, father, and football fan. I'm also a software engineer on{' '}
+          <a href="https://www.dronedeploy.com/">DroneDeploy's</a> flight team, where I spend my time helping drones get
+          into the air so they can get busy taking photographs.
         </p>
         <p>
-          I like to make websites. After I got out of the Army in 2009, I knew I wanted to do <strong>something</strong> with
-          technology, but I wasn't sure what. In early 2010, I finally found my calling as a web developer. I got my
-          start in a ColdFusion shop and worked quickly to devour as much knowledge as I could.
+          After I got out of the Army in 2009, I knew I wanted to do <strong>something</strong> with technology, but I
+          wasn't sure what. In early 2010, I finally found my calling as a web developer. I got my start in a ColdFusion
+          shop and worked quickly to devour as much knowledge as I could.
         </p>
         <p>
           Since those humble beginnings, I've worked hard to learn as much possible. I fully believe in using the best
