@@ -35,5 +35,11 @@ module.exports = {
         plugins: ['gatsby-remark-prismjs', 'gatsby-remark-images'],
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-52344422-1',
+      },
+    },
   ],
 };
