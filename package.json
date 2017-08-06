@@ -12,7 +12,6 @@
     "gatsby-plugin-google-analytics": "^1.0.1",
     "gatsby-plugin-postcss-sass": "^1.0.1",
     "gatsby-plugin-react-helmet": "^1.0.1",
-    "gatsby-plugin-sass": "^1.0.1",
     "gatsby-plugin-sharp": "^1.5.0",
     "gatsby-remark-images": "^1.5.0",
     "gatsby-remark-prismjs": "^1.2.0",
@@ -21,7 +20,6 @@
     "lodash.get": "^4.4.2",
     "prism-themes": "^1.0.0",
     "react-disqus-comments": "^1.0.3",
-    "uncss": "^0.15.0",
     "unist-util-filter": "^0.2.1",
     "unist-util-find": "^1.0.1"
   },
