@@ -19,23 +19,24 @@
     "gatsby-transformer-remark": "^1.1.0",
     "lodash.get": "^4.4.2",
     "prism-themes": "^1.0.0",
+    "ramda": "^0.24.1",
     "react-disqus-comments": "^1.0.3",
+    "sanitize-filename": "^1.6.1",
+    "slugify": "^1.1.0",
     "unist-util-filter": "^0.2.1",
     "unist-util-find": "^1.0.1"
   },
   "devDependencies": {
     "gh-pages": "^1.0.0"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": [],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "gatsby develop",
-    "format": "prettier --trailing-comma all --single-quote --write \"pages/*.js\" \"utils/*.js\" \"wrappers/*.js\" \"html.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "new-post": "node ./scripts/new-post --dir=./src/content/posts"
   }
 }
