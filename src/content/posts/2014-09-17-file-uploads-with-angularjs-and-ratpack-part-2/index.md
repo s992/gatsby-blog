@@ -5,7 +5,7 @@ comments: true
 path: "/blog/file-uploads-with-angularjs-and-ratpack-part-2"
 published: true
 ---
-This is a continuation of [this post](/blog/2014/09/16/file-uploads-with-angularjs-and-ratpack-part-1), where I described the Ratpack back end for our file upload application. If you're only interested in the Angular stuff, please keep reading, but otherwise I'd recommend you take a look at part 1 of the series.
+This is a continuation of [this post](/blog/file-uploads-with-angularjs-and-ratpack-part-1), where I described the Ratpack back end for our file upload application. If you're only interested in the Angular stuff, please keep reading, but otherwise I'd recommend you take a look at part 1 of the series.
 
 <!-- more -->
 

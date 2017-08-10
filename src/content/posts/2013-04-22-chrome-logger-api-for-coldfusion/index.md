@@ -19,7 +19,13 @@ Ok, enough of the boring stuff - let's see how this thing actually works!
 
 The most basic logging is accomplished via `chromelogger.log()`. Simply pass in any number of arguments and check the Chrome console.
 
-<script src="https://gist.github.com/s992/5431987.js?file=chromelogger1.cfc"></script>
+```java
+string = "I'm a string!";
+numeric = 12345;
+boolean = true;
+
+chromelogger.log( string, numeric, boolean );
+```
 
 This results in the following output to the console:
 
@@ -27,25 +33,76 @@ This results in the following output to the console:
 
 Of course, if you don't want all your logged items on one line, you can call log() as many times as you want:
 
-<script src="https://gist.github.com/s992/5431987.js?file=chromelogger2.cfc"></script>
+```java
+string = "I'm a string!";
+numeric = 12345;
+boolean = true;
+
+chromelogger.log( string );
+chromelogger.log( numeric );
+chromelogger.log( boolean );
+```
 
 ![scrn2](scrn2.png)
 
 In addition to `log()`, you also have the option to `warn()` and `error()`:
 
-<script src="https://gist.github.com/s992/5431987.js?file=chromelogger3.cfc"></script>
+```java
+warn = "I'm a warning!";
+error = "I'm an error!";
+
+chromelogger.warn( warn );
+chromelogger.error( error );
+```
 
 ![scrn3](scrn3.png)
 
 Don't forget about objects and exceptions (note that the recursion between User and Address is caught and handled):
 
-<script src="https://gist.github.com/s992/5431987.js?file=chromelogger4.cfc"></script>
+```java
+chromelogger.group( "This is my group label." );
+chromelogger.log( "Just a normal log..." );
+chromelogger.warn( "Uh-oh.." );
+chromelogger.error( "We broke something!" );
+chromelogger.groupEnd();
+```
 
 ![scrn4](scrn4.png)
 
 Stucts, arrays, and queries are supported too:
 
-<script src="https://gist.github.com/s992/5431987.js?file=chromelogger5.cfc"></script>
+```java
+user = new User();
+address = new Address();
+
+chromelogger.group( "Populating a user record..." );
+user.setID( 123 );
+user.setName( "Sean" );
+
+// Let's try to set a non-existent property and then log the error.
+try {
+
+  user.setAge( 26 );
+
+} catch( Any e ) {
+
+	chromelogger.error( "Uh-oh! We caught an error:" );
+	chromelogger.log( e );
+
+}
+
+address.setID( 456 );
+address.setStreet( "Test St." );
+
+// How does it work with some recursion?
+user.setAddress( address );
+address.setUser( user );
+
+// Just fine!
+chromelogger.log( user );
+
+chromelogger.groupEnd();
+```
 
 ![scrn5](scrn5.png)
 

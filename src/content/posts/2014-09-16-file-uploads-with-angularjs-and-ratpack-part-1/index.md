@@ -319,4 +319,4 @@ File saveThumb( BufferedImage image, String fileName, File directory ) {
 
 ## Conclusion
 
-That concludes the Ratpack/Groovy portion of our application. I'll describe the AngularJS app in part two, [here](/blog/2014/09/17/file-uploads-with-angularjs-and-ratpack-part-2). As always, please feel free to leave your comments and criticisms below!
+That concludes the Ratpack/Groovy portion of our application. I'll describe the AngularJS app in part two, [here](/blog/file-uploads-with-angularjs-and-ratpack-part-2). As always, please feel free to leave your comments and criticisms below!

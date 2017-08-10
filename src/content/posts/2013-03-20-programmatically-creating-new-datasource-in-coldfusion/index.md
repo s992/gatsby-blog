@@ -13,6 +13,42 @@ The ColdFusion administrator offers a pretty nice [API](http://help.adobe.com/en
 
 The code below uses the SHOW DATABASES command to get a list of all MySQL databases, and then creates a datasource for each. It will create datasources for stuff like information_schema and performance_schema, so you will have to manually delete those if you don't want them.
 
-<script src="https://gist.github.com/2141097.js"> </script>
+```html
+<!--- Plug in an existing datasource --->
+<cfquery name="qDatabases" datasource="YOUR_DSN_HERE">
+SHOW DATABASES;
+</cfquery>
+
+<!--- Log in to the CF admin with your password --->
+<cfset adminAPI = createObject( 'component', 'cfide.adminapi.administrator' ) />
+<cfset adminAPI.login( 'YOUR_PASSWORD_HERE' ) />
+
+<!--- Loop over our query and create datasources for each database in MySQL --->
+<cfloop query="qDatabases">
+
+	<cfscript>
+	dsnAPI = createObject( 'component', 'cfide.adminapi.datasource' );
+
+	// Create a struct that contains all the information for the
+	// datasource. Most of the keys are self explanatory, but I
+	// had trouble finding the one for the connection string setting.
+	// Turns out that the key is "args"
+	dsn = {
+		driver = 'mysql5',
+		name = '#database#',
+		host = 'localhost',
+		port = '3306',
+		database = '#database#',
+		username = 'YOUR_MYSQL_USERNAME',
+		password = 'YOUR_MYSQL_PASSWORD',
+		args = 'allowMultiQueries=true'
+	};
+
+	// Finally, we save the new datasource
+	dsnAPI.setMySQL5( argumentCollection = dsn );
+	</cfscript>
+
+</cfloop>
+```
 
 This isn't really something that I'll be using all that frequently, but I figured I'd share it in case anyone else wanted to save themselves half an hour of setting up datasources.

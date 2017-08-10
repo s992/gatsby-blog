@@ -30,15 +30,194 @@ X-SMTPAPI is where the real fun stuff comes into play. It's a JSON-encoded assoc
 
 SendGrid offers a few examples of code to build this JSON string in Perl, PHP, Python, and Ruby. I'm most familiar with PHP, so I went ahead and grabbed the [PHP version](http://docs.sendgrid.com/documentation/api/smtp-api/php-example/) and started converting it. I ended up with the following code, which works fine in my testing but has not yet been tested in a production setting - so use it at your own risk!
 
-<script src="https://gist.github.com/1445942.js?file=smtpApiHeader.cfc"></script>
+```java
+component {
+	
+
+	public smtpApiHeader function init() {
+		variables.data = {};
+
+		return this;
+	}
+
+	public void function addTo( required addresses ) {
+
+		if( !isDefined( 'variables.data.to' ) ) {
+			variables.data['to'] = [];
+		}
+		
+		if( isArray( arguments.addresses ) ) {
+			variables.data.to = arrayMerge( arguments.addresses, variables.data.to );
+		} else {
+			arrayAppend( variables.data.to, arguments.addresses );
+		}
+
+	}
+
+	public void function addSubVal( required string key, required array values ) {
+
+		if( !isDefined( 'variables.data.sub' ) ) {
+			variables.data['sub'] = {};
+		}
+		
+		if( !isArray( 'variables.data.sub["#arguments.key#"]' ) ){
+			variables.data.sub["#arguments.key#"] = [];
+		}
+
+		variables.data.sub["#arguments.key#"] = arrayMerge( variables.data.sub["#arguments.key#"], arguments.values  );
+
+	}
+
+	public void function setUniqueArgs( required struct values ) {
+		
+		variables.data['unique_args'] = arguments.values;
+
+	}
+
+	public void function setCategory( required string category ) {
+		
+		variables.data['category'] = arguments.category;
+
+	}
+
+	public void function addFilterSetting( filter, setting, value ) {
+		
+		if( !isDefined( 'variables.data.filters' ) ) {
+			variables.data['filters'] = {};
+		}
+
+		if( !isStruct( 'variables.data.filters["#arguments.filter#"]' ) ) {
+			variables.data['filters']["#arguments.filter#"] = {};
+		}
+
+		if( !isStruct( 'variables.data.filters["#arguments.filter#"]["settings"]' ) ) {
+			variables.data['filters']["#arguments.filter#"]['settings'] = {};
+		}
+
+		variables.data['filters']["#arguments.filter#"]['settings']["#arguments.setting#"] = arguments.value;
+
+	}
+
+	/**
+	 *	Appends array2 to the bottom of array1
+	 */
+	private array function arrayMerge( required array array1, required array array2  ) {
+		var i = '';
+
+		for( i = 1; i LTE arrayLen( arguments.array2 ); i++ ) {
+			arrayAppend( arguments.array1, arguments.array2[i] );
+		}
+
+		return arguments.array1;
+	}
+
+	public string function asJSON() {
+		var json = serializeJSON( variables.data );
+
+		// Adds spaces so that if the string wraps, data isn't broken.
+		json = reReplace( json, '(["\]}])([,:])(["\[{])', '\1\2 \3', 'all' );
+
+		return json;
+	}
+
+	public string function asString() {
+		var json = asJSON();
+		var str = 'X-SMTPAPI: ' & wrap( json, 76 );
+
+		return str;
+	}
+
+}
+```
 
 Now that we have the hard stuff out of the way, I'm going to put together a simple form and processing page that will take a comma delimited list of e-mail addresses and a comma delimited list of user names and then send out a batch e-mail via SendGrid's Web API.
 
-<script src="https://gist.github.com/1445942.js?file=index.cfm"></script>
+```html
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>SendGrid Demo</title>
+</head>
+<body>
+	<form action="process.cfm" method="POST">
+		<div>
+			<label for="emails">
+				E-mail Address(es)
+				<input type="text" name="emails" id="emails" />
+			</label>
+		</div>
+		<div>
+			<label for="subs">
+				Real Name(s)
+				<input type="text" name="subs" id="subs" />
+			</label>
+		</div>
+		<div>
+			<label for="subject">
+				Subject Line
+				<input type="text" name="subject" id="subject" />
+			</label>
+		</div>
+		<div>
+			<label for="body">
+				Body Text
+				<textarea name="body" id="body"></textarea>
+			</label>
+		</div>
+		<div>
+			<input type="submit" value="Send!" />
+		</div>
+	</form>
+</body>
+</html>
+```
 
 Yah, it's an ugly form but it gets what we need. So, onward! Time to process the data from this form, translate it into a JSON string, and then ship it off to SendGrid.
 
-<script src="https://gist.github.com/1445942.js?file=process.cfm"></script>
+```java
+api = new smtpApiHeader();
+
+// Convert our lists into arrays
+addresses = listToArray( form.emails );
+names = listToArray( form.subs );
+
+// Add our e-mail addresses to the JSON string
+api.addTo( addresses );
+
+// Add our substitutions to the JSON string
+// SendGrid will look for %name% in our e-mail
+// and replace it with the appropriate value
+api.addSubVal( '%name%', names );
+
+// Create our HTTP service so that we can send
+// this to the Web API
+httpSvc = new http();
+httpSvc.setUrl( 'https://sendgrid.com/api/mail.send.json' );
+
+// Add params containg the information we need to send
+
+// This is the JSON string that smtpApiHeader built for us
+httpSvc.addParam( name = 'x-smtpapi', value = api.asJSON(), type = 'url' );
+
+// The "to" address appears to be ignored if there is a "to" 
+// array in x-smtpapi. I just set it to the same value as the
+// "from address"
+httpSvc.addParam( name = 'to', value = 'your@email.com', type = 'url' );
+httpSvc.addParam( name = 'from', value = 'your@email.com', type = 'url' );
+httpSvc.addParam( name = 'subject', value = form.subject, type = 'url' );
+
+// We could also specify HTML content here by adding another
+// param named "html"
+httpSvc.addParam( name = 'text', value = form.body, type = 'url' );
+
+// Your api_user and api_key are your SendGrid username and password
+httpSvc.addParam( name = 'api_user', value = 'YOUR_API_USER', type = 'url' );
+httpSvc.addParam( name = 'api_key', value = 'YOUR_API_KEY', type = 'url' );
+
+// Send our request!
+httpResult = httpSvc.send().getPrefix();
+```
 
 As you can see, this is a really simple process and I've only just begun to scratch the surface.
 
