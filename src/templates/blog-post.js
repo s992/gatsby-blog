@@ -13,6 +13,7 @@ export default function Template({ data, location }) {
   const { day, month, year, path } = post.frontmatter;
   const pathMinusBlog = path.split('/')[2];
   const disqusId = `${siteMetadata.disqus.siteUrl}/blog/${year}/${month}/${day}/${pathMinusBlog}/`;
+  const disqusUrl = `${siteMetadata.siteUrl}${post.frontmatter.path}`;
 
   return (
     <main className="container-fluid">
@@ -31,7 +32,7 @@ export default function Template({ data, location }) {
                 shortname={siteMetadata.disqus.shortName}
                 identifier={disqusId}
                 title={post.frontmatter.title}
-                url={post.frontmatter.path}
+                url={disqusUrl}
               />
             : <p>Comments are disabled for this post.</p>}
         </div>
