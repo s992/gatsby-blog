@@ -1,8 +1,8 @@
 ---
-title: 'RxJS: take(1) vs. first()'
+title: 'RxJS: first() vs. take(1)'
 date: '2017-08-12T06:18:32.778Z'
 comments: true
-path: '/blog/rxjs-take1-vs-first'
+path: '/blog/rxjs-first-vs-take1'
 published: true
 ---
 When I first started using RxJS (and for a while afterwards), I assumed that `first()` was just a convenience method that functioned identically to `take(1)`. Occasionally I'd see the error, "EmptyError: no elements in sequence," but I never made the connection to my code.

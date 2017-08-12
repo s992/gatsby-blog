@@ -1,1 +1,2 @@
 /blog/:year/:month/:date/:slug /blog/:slug 301
+/blog/rxjs-take1-vs-first /blog/rxjs-first-vs-take1
