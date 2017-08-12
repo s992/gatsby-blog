@@ -5,6 +5,7 @@
   "author": "Sean Walsh <sean@swalsh.org>",
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
+    "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "gatsby": "^1.5.0",
     "gatsby-link": "^1.5.2",
