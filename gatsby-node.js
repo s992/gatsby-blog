@@ -47,7 +47,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     });
 
     // the home page counts as a "page" but we aren't generating anything for it, so skip it here.
-    const pages = result.data.allMarkdownRemark.totalCount % 5 - 1;
+    let pages = result.data.allMarkdownRemark.totalCount % 5 - 1;
+
+    if (pages <= 0) {
+      pages = result.data.allMarkdownRemark.totalCount / 5 - 1;
+    }
 
     for (let i = 1; i <= pages; i++) {
       const nextPage = i === pages ? null : `/blog/${i + 1}`;
