@@ -106,6 +106,18 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'Sean Walsh',
+        short_name: 'Sean Walsh',
+        start_url: '/',
+        background_color: '#f1f1ff',
+        theme_color: '#b93848',
+        display: 'minimal-ui',
+        icon: 'static/favicons/mstile-310x310.png',
+      }
+    },
     'gatsby-plugin-offline'
   ],
 };
