@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { siteMetadata } from '../gatsby-config';
+import { siteMetadata } from '../gatsby-config'
 
-const BUILD_TIME = new Date().getTime();
+const BUILD_TIME = new Date().getTime()
 
 export default class HTML extends React.Component {
   static propTypes = {
     body: PropTypes.string,
-  };
+  }
 
   render() {
-    let css;
+    let css
     if (process.env.NODE_ENV === 'production') {
       css = (
         <style
@@ -19,7 +19,7 @@ export default class HTML extends React.Component {
             __html: require('!raw!../public/styles.css'),
           }}
         />
-      );
+      )
     }
 
     return (
@@ -28,9 +28,7 @@ export default class HTML extends React.Component {
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>
-            {siteMetadata.title}
-          </title>
+          <title>{siteMetadata.title}</title>
           <meta name="author" content={siteMetadata.author} />
           <link rel="icon" href="/favicons/favicon.ico" />
           <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png" />
@@ -60,6 +58,6 @@ export default class HTML extends React.Component {
           {this.props.postBodyComponents}
         </body>
       </html>
-    );
+    )
   }
 }

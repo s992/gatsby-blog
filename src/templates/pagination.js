@@ -1,43 +1,46 @@
-import React from 'react';
-import Link from 'gatsby-link';
-import get from 'lodash.get';
+import React from 'react'
+import Link from 'gatsby-link'
+import get from 'lodash.get'
 
-import BlogHeader from '../components/blog-header';
+import BlogHeader from '../components/blog-header'
 
 export default function Pagination({ data, pathContext }) {
-  const { edges: posts } = data.allMarkdownRemark;
-  const { next, prev } = pathContext;
+  const { edges: posts } = data.allMarkdownRemark
+  const { next, prev } = pathContext
 
   return (
     <div className="blog-posts">
-      {posts.filter(post => post.node.frontmatter.published).map(({ node: post }) =>
+      {posts.filter((post) => post.node.frontmatter.published).map(({ node: post }) => (
         <div className="row" key={post.id}>
           <article className="col-md-8 col-lg-7 col-xl-5 center-block">
             <BlogHeader {...post.frontmatter} />
             <div className="content" dangerouslySetInnerHTML={{ __html: get(post, 'fields.more') || post.html }} />
-            {get(post, 'fields.more') &&
+            {get(post, 'fields.more') && (
               <footer>
                 <Link to={post.frontmatter.path}>Read on &rarr;</Link>
-              </footer>}
+              </footer>
+            )}
           </article>
-        </div>,
-      )}
+        </div>
+      ))}
       <div className="row">
         <div className="col-md-8 col-lg-7 col-xl-5 center-block">
           <nav className="pagination">
-            {next &&
+            {next && (
               <Link to={next} className="pull-left">
                 &laquo; Older
-              </Link>}
-            {prev &&
+              </Link>
+            )}
+            {prev && (
               <Link to={prev} className="pull-right">
                 Newer &raquo;
-              </Link>}
+              </Link>
+            )}
           </nav>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export const pageQuery = graphql`
@@ -61,4 +64,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

@@ -1,19 +1,19 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
-import ReactDisqusComments from 'react-disqus-comments';
+import React from 'react'
+import Helmet from 'react-helmet'
+import Link from 'gatsby-link'
+import ReactDisqusComments from 'react-disqus-comments'
 
-import BlogHeader from '../components/blog-header';
-import { siteMetadata } from '../../gatsby-config';
+import BlogHeader from '../components/blog-header'
+import { siteMetadata } from '../../gatsby-config'
 
 export default function Template({ data, location }) {
-  const { markdownRemark: post } = data;
+  const { markdownRemark: post } = data
 
   // because i'm too lazy to migrate disqus right now
-  const { day, month, year, path } = post.frontmatter;
-  const pathMinusBlog = path.split('/')[2];
-  const disqusId = `${siteMetadata.disqus.siteUrl}/blog/${year}/${month}/${day}/${pathMinusBlog}/`;
-  const disqusUrl = `${siteMetadata.siteUrl}${post.frontmatter.path}`;
+  const { day, month, year, path } = post.frontmatter
+  const pathMinusBlog = path.split('/')[2]
+  const disqusId = `${siteMetadata.disqus.siteUrl}/blog/${year}/${month}/${day}/${pathMinusBlog}/`
+  const disqusUrl = `${siteMetadata.siteUrl}${post.frontmatter.path}`
 
   return (
     <main className="container-fluid">
@@ -27,18 +27,20 @@ export default function Template({ data, location }) {
       <div className="row">
         <div className="col-md-8 col-lg-7 col-xl-5 center-block">
           <h1> Comments</h1>
-          {post.frontmatter.comments
-            ? <ReactDisqusComments
-                shortname={siteMetadata.disqus.shortName}
-                identifier={disqusId}
-                title={post.frontmatter.title}
-                url={disqusUrl}
-              />
-            : <p>Comments are disabled for this post.</p>}
+          {post.frontmatter.comments ? (
+            <ReactDisqusComments
+              shortname={siteMetadata.disqus.shortName}
+              identifier={disqusId}
+              title={post.frontmatter.title}
+              url={disqusUrl}
+            />
+          ) : (
+            <p>Comments are disabled for this post.</p>
+          )}
         </div>
       </div>
     </main>
-  );
+  )
 }
 
 export const pageQuery = graphql`
@@ -57,4 +59,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

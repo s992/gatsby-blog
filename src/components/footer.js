@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default function Footer({ socialLinks }) {
   return (
@@ -15,7 +15,12 @@ export default function Footer({ socialLinks }) {
           </a>
         </li>
         <li>
-          <a target="_blank" rel="noopener noreferrer" href={socialLinks.stackOverflow} aria-label="Sean's Stack Overflow Profile">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={socialLinks.stackOverflow}
+            aria-label="Sean's Stack Overflow Profile"
+          >
             <i className="fa fa-stack-overflow" />
           </a>
         </li>
@@ -26,5 +31,5 @@ export default function Footer({ socialLinks }) {
         </li>
       </ul>
     </footer>
-  );
+  )
 }

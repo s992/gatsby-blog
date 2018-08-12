@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'gatsby-link';
-import Helmet from 'react-helmet';
+import React from 'react'
+import Link from 'gatsby-link'
+import Helmet from 'react-helmet'
 
 export default function About() {
   return (
@@ -55,5 +55,5 @@ export default function About() {
         </ul>
       </div>
     </div>
-  );
+  )
 }

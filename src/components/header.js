@@ -1,29 +1,29 @@
-import React from 'react';
-import Link from 'gatsby-link';
-import classNames from 'classnames';
+import React from 'react'
+import Link from 'gatsby-link'
+import classNames from 'classnames'
 
 export default class Header extends React.Component {
   state = {
     expanded: false,
-  };
+  }
 
   constructor() {
-    super();
-    this.toggleExpanded = this.toggleExpanded.bind(this);
-    this.collapse = this.collapse.bind(this);
+    super()
+    this.toggleExpanded = this.toggleExpanded.bind(this)
+    this.collapse = this.collapse.bind(this)
   }
 
   toggleExpanded() {
-    this.setState(prevState => ({ ...prevState, expanded: !prevState.expanded }));
+    this.setState((prevState) => ({ ...prevState, expanded: !prevState.expanded }))
   }
 
   collapse() {
-    this.setState(prevState => ({ ...prevState, expanded: false }));
+    this.setState((prevState) => ({ ...prevState, expanded: false }))
   }
 
   render() {
-    const { title } = this.props;
-    const { expanded } = this.state;
+    const { title } = this.props
+    const { expanded } = this.state
 
     return (
       <header>
@@ -62,6 +62,6 @@ export default class Header extends React.Component {
           </div>
         </nav>
       </header>
-    );
+    )
   }
 }

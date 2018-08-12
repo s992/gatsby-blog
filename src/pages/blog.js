@@ -1,19 +1,22 @@
-import React from 'react';
-import Link from 'gatsby-link';
+import React from 'react'
+import Link from 'gatsby-link'
 
 export default function BlogArchive({ data }) {
-  const { edges: posts } = data.allMarkdownRemark;
-  const postsByYear = posts.map(post => post.node).filter(post => post.frontmatter.published).reduce((byYear, post) => {
-    const { year } = post.frontmatter;
+  const { edges: posts } = data.allMarkdownRemark
+  const postsByYear = posts
+    .map((post) => post.node)
+    .filter((post) => post.frontmatter.published)
+    .reduce((byYear, post) => {
+      const { year } = post.frontmatter
 
-    if (!byYear.hasOwnProperty(year)) {
-      byYear[year] = [];
-    }
+      if (!byYear.hasOwnProperty(year)) {
+        byYear[year] = []
+      }
 
-    byYear[year].push(post);
+      byYear[year].push(post)
 
-    return byYear;
-  }, {});
+      return byYear
+    }, {})
 
   return (
     <div className="row">
@@ -21,25 +24,23 @@ export default function BlogArchive({ data }) {
         <h1>Blog Archive</h1>
         <div id="blog-archives">
           <dl>
-            {Object.keys(postsByYear).sort((a, b) => b - a).map(year =>
-              <span className="stupid-wrapper-because-react" key={year}>
-                <dt>
-                  {year}
-                </dt>
-                {postsByYear[year].map(post =>
-                  <dd key={post.id}>
-                    <Link to={post.frontmatter.path}>
-                      {post.frontmatter.title}
-                    </Link>
-                  </dd>,
-                )}
-              </span>,
-            )}
+            {Object.keys(postsByYear)
+              .sort((a, b) => b - a)
+              .map((year) => (
+                <span className="stupid-wrapper-because-react" key={year}>
+                  <dt>{year}</dt>
+                  {postsByYear[year].map((post) => (
+                    <dd key={post.id}>
+                      <Link to={post.frontmatter.path}>{post.frontmatter.title}</Link>
+                    </dd>
+                  ))}
+                </span>
+              ))}
           </dl>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export const pageQuery = graphql`
@@ -58,4 +59,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

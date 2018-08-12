@@ -1,10 +1,10 @@
-import React from 'react';
-import Link from 'gatsby-link';
+import React from 'react'
+import Link from 'gatsby-link'
 
-import Pagination from '../templates/pagination';
+import Pagination from '../templates/pagination'
 
 export default function Index({ data }) {
-  return <Pagination pathContext={{ next: `/blog/1` }} data={data} />;
+  return <Pagination pathContext={{ next: `/blog/1` }} data={data} />
 }
 
 export const pageQuery = graphql`
@@ -28,4 +28,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
