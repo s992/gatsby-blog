@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import BlogHeader from '../components/blog-header'
 import { siteMetadata } from '../../gatsby-config'
 
-export default function Template({ data, location }) {
+export default function BlogPost({ data, location }) {
   const { markdownRemark: post } = data
 
   // because i'm too lazy to migrate disqus right now

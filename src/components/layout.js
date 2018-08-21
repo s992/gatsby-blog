@@ -8,7 +8,7 @@ import Footer from '../components/footer'
 
 import '../scss/site.scss'
 
-export default class Template extends React.Component {
+export default class Layout extends React.Component {
   render() {
     return (
       <div>
