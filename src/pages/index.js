@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import Pagination from '../templates/pagination'
 
 export default function Index({ data }) {
-  return <Pagination pathContext={{ next: `/blog/1` }} data={data} />
+  return <Pagination pageContext={{ next: `/blog/1` }} data={data} />
 }
 
 export const pageQuery = graphql`

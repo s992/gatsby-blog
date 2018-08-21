@@ -1,14 +1,13 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import get from 'lodash.get'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import Layout from '../components/layout'
 import BlogHeader from '../components/blog-header'
 
-export default function Pagination({ data, pathContext }) {
+export default function Pagination({ data, pageContext }) {
   const { edges: posts } = data.allMarkdownRemark
-  const { next, prev } = pathContext
+  const { next, prev } = pageContext
 
   return (
     <Layout>

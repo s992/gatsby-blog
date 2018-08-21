@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 
 export default function BlogHeader({ title, date, formattedDate, path }) {
   return (
