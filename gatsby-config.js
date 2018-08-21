@@ -1,4 +1,4 @@
-const siteUrl = 'https://swalsh.org';
+const siteUrl = 'https://swalsh.org'
 
 module.exports = {
   siteMetadata: {
@@ -21,12 +21,8 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
-    {
-      resolve: 'gatsby-plugin-postcss-sass',
-      options: {
-        postCssPlugins: [],
-      },
-    },
+    'gatsby-plugin-sass',
+    'gatsby-plugin-postcss',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -62,14 +58,14 @@ module.exports = {
             allMarkdownRemark,
             generator: 'GatsbyJS',
             site_url: siteUrl,
-          });
+          })
         },
         feeds: [
           {
             output: '/rss.xml',
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
-                const link = `${site.siteMetadata.siteUrl}${edge.node.frontmatter.path}`;
+              return allMarkdownRemark.edges.map((edge) => {
+                const link = `${site.siteMetadata.siteUrl}${edge.node.frontmatter.path}`
 
                 return {
                   title: edge.node.frontmatter.title,
@@ -77,8 +73,8 @@ module.exports = {
                   url: link,
                   guid: link,
                   date: edge.node.frontmatter.date,
-                };
-              });
+                }
+              })
             },
             query: `
               {
@@ -106,6 +102,6 @@ module.exports = {
         ],
       },
     },
-    'gatsby-plugin-offline'
+    'gatsby-plugin-offline',
   ],
-};
+}

@@ -1,8 +1,9 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
 import ReactDisqusComments from 'react-disqus-comments'
+import { graphql } from 'gatsby'
 
+import Layout from '../components/layout'
 import BlogHeader from '../components/blog-header'
 import { siteMetadata } from '../../gatsby-config'
 
@@ -16,30 +17,32 @@ export default function Template({ data, location }) {
   const disqusUrl = `${siteMetadata.siteUrl}${post.frontmatter.path}`
 
   return (
-    <main className="container-fluid">
-      <Helmet title={`Sean Walsh - ${post.frontmatter.title}`} />
-      <div className="row">
-        <article className="col-md-8 col-lg-7 col-xl-5 center-block">
-          <BlogHeader {...post.frontmatter} />
-          <div className="content full-content" dangerouslySetInnerHTML={{ __html: post.html }} />
-        </article>
-      </div>
-      <div className="row">
-        <div className="col-md-8 col-lg-7 col-xl-5 center-block">
-          <h1> Comments</h1>
-          {post.frontmatter.comments ? (
-            <ReactDisqusComments
-              shortname={siteMetadata.disqus.shortName}
-              identifier={disqusId}
-              title={post.frontmatter.title}
-              url={disqusUrl}
-            />
-          ) : (
-            <p>Comments are disabled for this post.</p>
-          )}
+    <Layout>
+      <main className="container-fluid">
+        <Helmet title={`Sean Walsh - ${post.frontmatter.title}`} />
+        <div className="row">
+          <article className="col-md-8 col-lg-7 col-xl-5 center-block">
+            <BlogHeader {...post.frontmatter} />
+            <div className="content full-content" dangerouslySetInnerHTML={{ __html: post.html }} />
+          </article>
         </div>
-      </div>
-    </main>
+        <div className="row">
+          <div className="col-md-8 col-lg-7 col-xl-5 center-block">
+            <h1> Comments</h1>
+            {post.frontmatter.comments ? (
+              <ReactDisqusComments
+                shortname={siteMetadata.disqus.shortName}
+                identifier={disqusId}
+                title={post.frontmatter.title}
+                url={disqusUrl}
+              />
+            ) : (
+              <p>Comments are disabled for this post.</p>
+            )}
+          </div>
+        </div>
+      </main>
+    </Layout>
   )
 }
 
