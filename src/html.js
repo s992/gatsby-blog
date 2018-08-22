@@ -1,27 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { siteMetadata } from '../gatsby-config'
 
-const BUILD_TIME = new Date().getTime()
+import 'css/typography.css'
+import 'scss/site.scss'
 
 export default class HTML extends React.Component {
-  static propTypes = {
-    body: PropTypes.string,
-  }
-
   render() {
-    let css
-    if (process.env.NODE_ENV === 'production') {
-      css = (
-        <style
-          dangerouslySetInnerHTML={{
-            __html: require('!raw!../public/styles.css'),
-          }}
-        />
-      )
-    }
-
     return (
       <html lang="en">
         <head>
@@ -51,7 +36,6 @@ export default class HTML extends React.Component {
           <meta name="theme-color" content="#ffffff" />
           <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Slabo+27px|Roboto" />
           {this.props.headComponents}
-          {css}
         </head>
         <body>
           <div id="___gatsby" dangerouslySetInnerHTML={{ __html: this.props.body }} />
