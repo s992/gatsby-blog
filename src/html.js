@@ -2,8 +2,8 @@ import React from 'react'
 
 import { siteMetadata } from '../gatsby-config'
 
-import 'css/typography.css'
-import 'scss/site.scss'
+import './css/typography.css'
+import './scss/site.scss'
 
 export default class HTML extends React.Component {
   render() {
