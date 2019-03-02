@@ -1,2 +1,7 @@
 /blog/:year/:month/:date/:slug /blog/:slug 301
 /blog/rxjs-take1-vs-first /blog/rxjs-first-vs-take1
+
+# Redirect domain aliases to primary domain
+https://www.swalsh.org/* https://swalsh.org/:splat 301!
+https://www.swalsh.dev/* https://swalsh.org/:splat 301!
+https://swalsh.dev/* https://swalsh.org/:splat 301!
