@@ -55,8 +55,12 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "gatsby develop",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "new-post": "node ./scripts/new-post --dir=./src/content/posts",
-    "precommit": "lint-staged"
+    "new-post": "node ./scripts/new-post --dir=./src/content/posts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,json,css,md}": [
