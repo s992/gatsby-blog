@@ -5,6 +5,7 @@
   "author": "Sean Walsh <sean@swalsh.org>",
   "dependencies": {
     "@mdx-js/mdx": "^1.5.1",
+    "@mdx-js/react": "^1.5.1",
     "@mdx-js/tag": "^0.20.3",
     "bootstrap-sass": "^3.4.1",
     "classnames": "^2.2.6",

@@ -23,7 +23,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-sass',
     'gatsby-plugin-postcss',
-    'gatsby-mdx',
+    'gatsby-plugin-mdx',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
