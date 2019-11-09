@@ -1,20 +1,12 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import ReactDisqusComments from 'react-disqus-comments'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 import BlogHeader from '../components/blog-header'
-import { siteMetadata } from '../../gatsby-config'
 
-export default function BlogPost({ data, location }) {
+export default function BlogPost({ data }) {
   const { markdownRemark: post } = data
-
-  // because i'm too lazy to migrate disqus right now
-  const { day, month, year, path } = post.frontmatter
-  const pathMinusBlog = path.split('/')[2]
-  const disqusId = `${siteMetadata.disqus.siteUrl}/blog/${year}/${month}/${day}/${pathMinusBlog}/`
-  const disqusUrl = `${siteMetadata.siteUrl}${post.frontmatter.path}`
 
   return (
     <Layout>
@@ -25,21 +17,6 @@ export default function BlogPost({ data, location }) {
             <BlogHeader {...post.frontmatter} />
             <div className="content full-content" dangerouslySetInnerHTML={{ __html: post.html }} />
           </article>
-        </div>
-        <div className="row">
-          <div className="col-md-8 col-lg-7 col-xl-5 center-block">
-            <h1> Comments</h1>
-            {post.frontmatter.comments ? (
-              <ReactDisqusComments
-                shortname={siteMetadata.disqus.shortName}
-                identifier={disqusId}
-                title={post.frontmatter.title}
-                url={disqusUrl}
-              />
-            ) : (
-              <p>Comments are disabled for this post.</p>
-            )}
-          </div>
         </div>
       </main>
     </Layout>
