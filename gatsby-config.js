@@ -12,10 +12,6 @@ module.exports = {
       stackOverflow: 'http://stackoverflow.com/users/603502/sean-walsh',
       linkedin: 'https://www.linkedin.com/pub/sean-walsh/bb/aa4/6a8',
     },
-    disqus: {
-      shortName: 'swalsh',
-      siteUrl: 'http://swalsh.org',
-    },
   },
   plugins: [
     'gatsby-plugin-catch-links',
@@ -23,7 +19,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-sass',
     'gatsby-plugin-postcss',
-    'gatsby-mdx',
+    'gatsby-plugin-mdx',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
