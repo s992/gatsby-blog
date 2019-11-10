@@ -3,7 +3,11 @@ import { graphql, Link } from 'gatsby'
 
 import Layout from '../components/layout'
 
-export default function BlogArchive({ data }) {
+interface Props {
+  data: Posts
+}
+
+export default function BlogArchive({ data }: Props) {
   const { edges: posts } = data.allMarkdownRemark
   const postsByYear = posts
     .map((post) => post.node)
@@ -18,7 +22,7 @@ export default function BlogArchive({ data }) {
       byYear[year].push(post)
 
       return byYear
-    }, {})
+    }, {} as { [key: string]: Post[] })
 
   return (
     <Layout>
@@ -28,7 +32,7 @@ export default function BlogArchive({ data }) {
           <div id="blog-archives">
             <dl>
               {Object.keys(postsByYear)
-                .sort((a, b) => b - a)
+                .sort((a, b) => parseInt(b) - parseInt(a))
                 .map((year) => (
                   <span className="stupid-wrapper-because-react" key={year}>
                     <dt>{year}</dt>
@@ -45,6 +49,26 @@ export default function BlogArchive({ data }) {
       </div>
     </Layout>
   )
+}
+
+interface Post {
+  id: string
+  frontmatter: {
+    title: string
+    year: string
+    published: boolean
+    path: string
+  }
+}
+
+interface Posts {
+  allMarkdownRemark: {
+    edges: [
+      {
+        node: Post
+      },
+    ]
+  }
 }
 
 export const pageQuery = graphql`

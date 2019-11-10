@@ -1,7 +1,14 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-export default function BlogHeader({ title, date, formattedDate, path }) {
+interface Props {
+  title: string
+  date: string
+  formattedDate: string
+  path: string
+}
+
+export default function BlogHeader({ title, date, formattedDate, path }: Props) {
   return (
     <header>
       <h1>

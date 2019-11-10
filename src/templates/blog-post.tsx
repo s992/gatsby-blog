@@ -5,7 +5,11 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import BlogHeader from '../components/blog-header'
 
-export default function BlogPost({ data }) {
+interface Props {
+  data: Post
+}
+
+export default function BlogPost({ data }: Props) {
   const { markdownRemark: post } = data
 
   return (
@@ -21,6 +25,21 @@ export default function BlogPost({ data }) {
       </main>
     </Layout>
   )
+}
+
+interface Post {
+  markdownRemark: {
+    html: string
+    frontmatter: {
+      date: string
+      formattedDate: string
+      year: string
+      month: string
+      day: string
+      path: string
+      title: string
+    }
+  }
 }
 
 export const pageQuery = graphql`

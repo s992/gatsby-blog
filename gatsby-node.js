@@ -13,8 +13,8 @@ const remark = new Remark().data('settings', {
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
-  const blogPostTemplate = path.resolve('src/templates/blog-post.js')
-  const paginationTemplate = path.resolve('src/templates/pagination.js')
+  const blogPostTemplate = path.resolve('src/templates/blog-post.tsx')
+  const paginationTemplate = path.resolve('src/templates/pagination.tsx')
 
   return graphql(`
     {
