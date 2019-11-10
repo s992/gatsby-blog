@@ -20,6 +20,7 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-postcss',
     'gatsby-plugin-mdx',
+    'gatsby-plugin-typescript',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
