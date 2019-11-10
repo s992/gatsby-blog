@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const Remark = require('remark')
 const find = require('unist-util-find')
@@ -77,7 +78,7 @@ exports.onCreateNode = ({ node, actions }) => {
     return
   }
 
-  const { createNode, createNodeField } = actions
+  const { createNodeField } = actions
   const ast = remark.parse(node.internal.content)
   const more = find(ast, (node) => node.type === 'html' && node.value === '<!-- more -->')
 

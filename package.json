@@ -66,6 +66,7 @@
     "build": "gatsby build",
     "start": "gatsby develop",
     "test:ts": "tsc --noEmit --skipLibCheck",
+    "lint": "eslint '**/*.{js,ts,tsx}' --ignore-pattern node_modules/ --ignore-pattern public/",
     "new-post": "node ./scripts/new-post --dir=./src/content/posts"
   },
   "husky": {

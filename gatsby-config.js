@@ -55,6 +55,7 @@ module.exports = {
           return Object.assign({}, site.siteMetadata, {
             allMarkdownRemark,
             generator: 'GatsbyJS',
+            // eslint-disable-next-line @typescript-eslint/camelcase
             site_url: siteUrl,
           })
         },
