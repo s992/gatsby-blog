@@ -5,7 +5,13 @@ import { siteMetadata } from '../gatsby-config'
 import './css/typography.css'
 import './scss/site.scss'
 
-export default class HTML extends React.Component {
+interface Props {
+  headComponents: React.Component[]
+  body: string
+  postBodyComponents: React.Component[]
+}
+
+export default class HTML extends React.Component<Props> {
   render() {
     return (
       <html lang="en">

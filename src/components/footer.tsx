@@ -1,6 +1,15 @@
 import React from 'react'
 
-export default function Footer({ socialLinks }) {
+interface Props {
+  socialLinks: {
+    github: string
+    twitter: string
+    stackOverflow: string
+    linkedin: string
+  }
+}
+
+export default function Footer({ socialLinks }: Props) {
   return (
     <footer id="site-footer" className="container-fluid">
       <ul className="nav nav-pills pull-right">

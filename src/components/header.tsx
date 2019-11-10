@@ -2,22 +2,24 @@ import React from 'react'
 import { Link } from 'gatsby'
 import classNames from 'classnames'
 
-export default class Header extends React.Component {
-  state = {
+interface Props {
+  title: string
+}
+
+interface State {
+  expanded: boolean
+}
+
+export default class Header extends React.Component<Props, State> {
+  state: State = {
     expanded: false,
   }
 
-  constructor() {
-    super()
-    this.toggleExpanded = this.toggleExpanded.bind(this)
-    this.collapse = this.collapse.bind(this)
-  }
-
-  toggleExpanded() {
+  toggleExpanded = () => {
     this.setState((prevState) => ({ ...prevState, expanded: !prevState.expanded }))
   }
 
-  collapse() {
+  collapse = () => {
     this.setState((prevState) => ({ ...prevState, expanded: false }))
   }
 
